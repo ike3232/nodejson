@@ -16,17 +16,17 @@ jobs:
   run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
      
       - name: Build Docker Image
-        run: docker build -t integrationninjas/nodejs-app  .
+        run: docker build -t ik3232/nodejson  .
       - name: Publish Image to docker hub
-        run: docker push ik3232/nodejs-app:latest 
+        run: docker push ik3232/nodejson:latest 
  
   deploy:
     needs: build
     runs-on: self-hosted 
     steps:
       - name: Pull image from docker hub
-        run: docker pull ik3232/nodejs-app:latest 
+        run: docker pull ik3232/nodejson:latest 
       - name: Delete old container
-        run: docker rm -f nodejs-app-container  
+        run: docker rm -f nodejson-container  
       - name: Run Docker Container
-        run: docker run -d -p 4000:4000 --name nodejs-app-container -e MONGO_PASSWORD='${{ secrets.MONGO_PASSWORD }}' ik3232/nodejs-app
+        run: docker run -d -p 4000:4000 --name nodejson-container -e MONGO_PASSWORD='${{ secrets.MONGO_PASSWORD }}' ik3232/nodejson
