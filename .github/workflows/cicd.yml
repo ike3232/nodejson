@@ -37,8 +37,9 @@ jobs:
 
       - name: Run new Docker container
         env:
-          MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+          MONGO_URI: ${{ secrets.MONGO_URI }}
         run: |
           docker run -d -p 4000:4000 --name nodejson-container \
-            -e MONGO_PASSWORD="$MONGO_PASSWORD" \
+            -e MONGO_URI="$MONGO_URI" \
             ik3232/nodejson:latest
+
