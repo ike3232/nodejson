@@ -35,10 +35,10 @@ jobs:
         run: |
           docker rm -f nodejson-container || true
 
-- name: Run new Docker container
-env:
-MONGO_URI: ${{ secrets.MONGO_URI }}
-run: |
-docker run -d -p 4000:4000 --name nodejson-container \
--e MONGO_URI="$MONGO_URI" \
-ik3232/nodejson:latest
+      - name: Run new Docker container
+        env:
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+        run: |
+          docker run -d -p 4000:4000 --name nodejson-container \
+          -e MONGO_URI="$MONGO_URI" \
+          ik3232/nodejson:latest
